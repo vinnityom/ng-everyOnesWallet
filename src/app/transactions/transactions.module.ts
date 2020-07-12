@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab2Page } from './transactions.page';
+import { TransactionsPage } from './transactions.page';
 
 import { Tab2PageRoutingModule } from './transactions-routing.module';
 
@@ -14,6 +14,6 @@ import { Tab2PageRoutingModule } from './transactions-routing.module';
     FormsModule,
     Tab2PageRoutingModule
   ],
-  declarations: [Tab2Page]
+  declarations: [TransactionsPage]
 })
 export class Tab2PageModule {}
