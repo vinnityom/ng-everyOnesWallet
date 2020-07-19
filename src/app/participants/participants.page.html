@@ -22,7 +22,7 @@
   </ion-header>
 
   <ion-list>
-    <ion-item *ngFor="let participant of participants">
+    <ion-item *ngFor="let participant of participants$ | async">
       <div>{{participant.name}}</div>
     </ion-item>
   </ion-list>

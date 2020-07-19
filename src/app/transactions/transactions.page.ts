@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
-import { Transaction, Participant } from '../shared/models';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Select } from '@ngxs/store';
 import { PickerController, AlertController } from '@ionic/angular';
+import { Transaction, Participant } from '../shared/models';
+import { ParticipantsState } from '../core/states/participants/participants.state';
 
 @Component({
   selector: 'app-tab2',
@@ -13,10 +17,7 @@ export class TransactionsPage {
     { from: 2, to: 1, howMuch: 300 },
   ];
 
-  private particapants: Array<Participant> = [
-    { id: 1, name: 'Андрей' },
-    { id: 2, name: 'Артём' },
-  ]
+  @Select(ParticipantsState.getParticipants) public participants$: Observable<Participant[]>;
 
   constructor(
     private pickerController: PickerController,
@@ -30,8 +31,8 @@ export class TransactionsPage {
         { text: 'Добавить', handler: (value) => { this.handlePicking(value) } },
       ],
       columns: [
-        { name: 'to', options: this.particapants.map(({ id, name }) => { return { text: name, value: id } }) },
-        { name: 'from', options: this.particapants.map(({ id, name }) => { return { text: name, value: id } }) },
+        { name: 'to', options: this.mapParticipants() },
+        { name: 'from', options: this.mapParticipants() },
       ],
     });
 
@@ -56,6 +57,15 @@ export class TransactionsPage {
 
   private addTransaction(transaction: Transaction): void {
     this.transactions.push(transaction)
+  }
+
+  private mapParticipants(): Array<{ text: string, value: number }> {
+    const columnOptions = [];
+    this.participants$.forEach(participants => participants.forEach(
+      ({ id, name }) => columnOptions.push({ text: name, value: id })
+    ));
+
+    return columnOptions;
   }
 
 }

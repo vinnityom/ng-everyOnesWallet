@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
+import { Store, Select } from '@ngxs/store';
+import { Observable, from } from 'rxjs';
 import { AlertController } from '@ionic/angular';
+import { uniqueId } from 'lodash';
 import { Participant } from '../shared/models';
+import { AddParticipant } from '../core/states/participants/participants.actions';
+import { ParticipantsState } from '../core/states/participants/participants.state';
 
 @Component({
   selector: 'app-tab1',
@@ -8,13 +13,11 @@ import { Participant } from '../shared/models';
   styleUrls: ['participants.page.scss']
 })
 export class ParticipantsPage {
-  public participants: Array<Participant> = [
-    { name: 'Андрей', id: 1 },
-    { name: 'Артём', id: 2 },
-  ];
+  @Select(ParticipantsState.getParticipants) public participants$: Observable<Participant[]>;
 
   constructor(
     private alertController: AlertController,
+    private store: Store,
   ) {}
 
   public async showAddParticipantModal(): Promise<void> {
@@ -35,8 +38,8 @@ export class ParticipantsPage {
       return;
     }
 
-    const newParticipant: Participant = { name, id: this.participants.length + 1 };
-    this.participants = [...this.participants, newParticipant];
+    const newParticipant: Participant = { name, id: Number(uniqueId()) };
+    this.store.dispatch(new AddParticipant(newParticipant));
   }
 
 }
