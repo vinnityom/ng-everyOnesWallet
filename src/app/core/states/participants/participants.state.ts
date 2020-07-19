@@ -1,5 +1,5 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { Participant } from '../../../shared/models';
+import { Participant } from '../../../shared/models/models';
 import { AddParticipant, RemoveParticipant } from './participants.actions';
 
 export class ParticipantsStateModel {

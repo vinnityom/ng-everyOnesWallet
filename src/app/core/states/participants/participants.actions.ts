@@ -1,4 +1,4 @@
-import { Participant } from '../../../shared/models';
+import { Participant } from '../../../shared/models/models';
 
 export class AddParticipant {
     static readonly type = '[PARTICIPANT] Add';

@@ -12,17 +12,21 @@
 
   </ion-header>
 
-  <ion-list>
+  <ion-list *ngIf="(participants$ | async)?.length; else notEnoughParticipantsMessage">
     <ion-item *ngFor="let transaction of transactions$ | async">
       <div>Участнник {{transaction.to}} заплатил за участника {{transaction.from}} {{transaction.howMuch}} рублей</div>
     </ion-item>
   </ion-list>
+
+  <ng-template #notEnoughParticipantsMessage>
+    <app-add-participant-message></app-add-participant-message>
+  </ng-template>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
+  <ion-toolbar *ngIf="(participants$ | async)?.length >= 2">
     <ion-button
-      (click)="showPicker()"
+      (click)="showAddTransactionDialogue()"
       style="width: 100%;"
     >
       <ion-icon slot="icon-only" name="add"></ion-icon>

@@ -21,10 +21,14 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list>
+  <ion-list *ngIf="(participants$ | async)?.length; else addParticipant">
     <ion-item *ngFor="let participant of participants$ | async">
       <div>{{participant.name}}</div>
     </ion-item>
   </ion-list>
+
+  <ng-template #addParticipant>
+    <app-add-participant-message></app-add-participant-message>
+  </ng-template>
 
 </ion-content>

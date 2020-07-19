@@ -5,13 +5,15 @@ import { FormsModule } from '@angular/forms';
 import { ParticipantsPage } from './participants.page';
 
 import { Tab1PageRoutingModule } from './participants-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    Tab1PageRoutingModule
+    Tab1PageRoutingModule,
+    SharedModule,
   ],
   declarations: [ParticipantsPage]
 })

@@ -1,4 +1,4 @@
-import { Transaction } from '../../../shared/models';
+import { Transaction } from '../../../shared/models/models';
 
 export class AddTransaction {
     static readonly type = '[TRANSACTION] Add';

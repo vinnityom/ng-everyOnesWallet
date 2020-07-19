@@ -1,5 +1,5 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { Transaction } from '../../../shared/models';
+import { Transaction } from '../../../shared/models/models';
 import { AddTransaction, RemoveTransaction } from './transactions.actions';
 
 export class TransactionsStateModel {

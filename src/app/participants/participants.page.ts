@@ -3,7 +3,7 @@ import { Store, Select } from '@ngxs/store';
 import { Observable, from } from 'rxjs';
 import { AlertController } from '@ionic/angular';
 import { uniqueId } from 'lodash';
-import { Participant } from '../shared/models';
+import { Participant } from '../shared/models/models';
 import { AddParticipant } from '../core/states/participants/participants.actions';
 import { ParticipantsState } from '../core/states/participants/participants.state';
 

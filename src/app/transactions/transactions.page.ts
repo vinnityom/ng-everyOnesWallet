@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { PickerController, AlertController } from '@ionic/angular';
 import { uniqueId } from 'lodash';
-import { Transaction, Participant } from '../shared/models';
+import { Transaction, Participant } from '../shared/models/models';
 import { ParticipantsState } from '../core/states/participants/participants.state';
 import { TransactionsState } from '../core/states/transactions/transactions.state';
 import { AddTransaction } from '../core/states/transactions/transactions.actions';
@@ -22,6 +22,10 @@ export class TransactionsPage {
     private alertController: AlertController,
     private store: Store,
   ) {}
+
+  public showAddTransactionDialogue(): void {
+    this.showPicker();
+  }
 
   public async showPicker(): Promise<void> {
     const picker = await this.pickerController.create({
