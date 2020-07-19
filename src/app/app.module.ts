@@ -12,6 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ParticipantsState } from './core/states/participants/participants.state';
+import { TransactionsState } from './core/states/transactions/transactions.state';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { ParticipantsState } from './core/states/participants/participants.state
     AppRoutingModule,
     NgxsModule.forRoot([
       ParticipantsState,
+      TransactionsState,
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),

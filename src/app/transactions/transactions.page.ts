@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { PickerController, AlertController } from '@ionic/angular';
+import { uniqueId } from 'lodash';
 import { Transaction, Participant } from '../shared/models';
 import { ParticipantsState } from '../core/states/participants/participants.state';
+import { TransactionsState } from '../core/states/transactions/transactions.state';
+import { AddTransaction } from '../core/states/transactions/transactions.actions';
 
 @Component({
   selector: 'app-tab2',
@@ -12,16 +14,13 @@ import { ParticipantsState } from '../core/states/participants/participants.stat
   styleUrls: ['transactions.page.scss']
 })
 export class TransactionsPage {
-  public transactions: Array<Transaction> = [
-    { from: 1, to: 2, howMuch: 200 },
-    { from: 2, to: 1, howMuch: 300 },
-  ];
-
   @Select(ParticipantsState.getParticipants) public participants$: Observable<Participant[]>;
+  @Select(TransactionsState.getTransactions) public transactions$: Observable<Transaction[]>;
 
   constructor(
     private pickerController: PickerController,
     private alertController: AlertController,
+    private store: Store,
   ) {}
 
   public async showPicker(): Promise<void> {
@@ -56,7 +55,8 @@ export class TransactionsPage {
   }
 
   private addTransaction(transaction: Transaction): void {
-    this.transactions.push(transaction)
+    const transactionsWithId = { ...transaction, id: uniqueId() };
+    this.store.dispatch(new AddTransaction(transactionsWithId));
   }
 
   private mapParticipants(): Array<{ text: string, value: number }> {
