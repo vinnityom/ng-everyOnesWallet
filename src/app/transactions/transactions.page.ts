@@ -31,7 +31,7 @@ export class TransactionsPage {
     const picker = await this.pickerController.create({
       buttons: [
         { role: 'cancel', text: 'Отмена' },
-        { text: 'Добавить', handler: (value) => { this.handlePicking(value) } },
+        { text: 'Добавить', handler: (value) => { this.handlePicking(value); } },
       ],
       columns: [
         { name: 'to', options: this.mapParticipants() },
@@ -41,7 +41,7 @@ export class TransactionsPage {
 
     picker.present();
   }
-  
+
   private async handlePicking(pickerValue): Promise<void> {
     const { from, to } = pickerValue;
     const partialTransaction = { from: from.value, to: to.value };
@@ -54,7 +54,7 @@ export class TransactionsPage {
         { text: 'Добавить', handler: (value) => this.addTransaction({ ...partialTransaction, howMuch: value['0'] }) },
       ],
     });
-    
+
     alert.present();
   }
 
