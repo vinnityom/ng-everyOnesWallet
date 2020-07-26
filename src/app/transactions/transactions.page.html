@@ -14,7 +14,7 @@
 
   <ion-list *ngIf="(participants$ | async)?.length >= 2; else notEnoughParticipantsMessage">
     <ion-item *ngFor="let transaction of transactions$ | async">
-      <div>Участнник {{transaction.to}} заплатил за участника {{transaction.from}} {{transaction.howMuch}} рублей</div>
+      <div>Участнник {{transaction.to | toName | async}} заплатил за участника {{transaction.from | toName | async}} {{transaction.howMuch}} рублей</div>
     </ion-item>
   </ion-list>
 
